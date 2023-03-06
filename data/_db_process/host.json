@@ -1,0 +1,6 @@
+{
+    "hostname": "cleads_db.mysql.dbaas.com.br",
+    "user": "cleads_db",
+    "password": "Cleads@123",
+    "database": "cleads_db"
+}
