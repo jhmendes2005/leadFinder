@@ -91,8 +91,10 @@ def start(location, radius, keywords, user_id):
         results[keyword] = google_places.search_places(location, radius, [keyword])
     
     # Extraia os dados de cada empresa e salve em um novo dicionário
+    search_id = secrets.token_urlsafe(16)
     extracted_data = {
         'user_id': user_id,
+        'search_id': search_id,
         'search_date': search_date,
         'results': {}
     }
@@ -106,11 +108,10 @@ def start(location, radius, keywords, user_id):
                 extracted_data['results'][keyword].append(details)
     
     # Salve os resultados da busca em um arquivo JSON
-    name = secrets.token_urlsafe(16)
-    name = f'{name}.json'
-    with open(f'../slv0.0.2/data/_leads_saves/{name}', 'w', encoding='utf-8') as f:
+    name = f'{search_id}.json'
+    with open(f'../slv0.0.2/data/_leads_saves/saves/{name}', 'w', encoding='utf-8') as f:
         json.dump(extracted_data, f, ensure_ascii=False, indent=4)
 
     # Ler o arquivo JSON e imprimir seus conteúdos
-    with open(f'../slv0.0.2/data/_leads_saves/{name}', 'r', encoding='utf-8') as f:
+    with open(f'../slv0.0.2/data/_leads_saves/saves/{name}', 'r', encoding='utf-8') as f:
         data = json.load(f)

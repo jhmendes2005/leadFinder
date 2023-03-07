@@ -1,5 +1,6 @@
 import connector
 import secrets
+from _leads_saves import process
 
 #criação e inserção de dados no DB
 class methods():
@@ -68,8 +69,11 @@ class methods():
         finally:
             mydb.close()
         return mycursor.rowcount, "record inserted."
+
     
 set = methods()
 
-result, code = set.create_user("break20001", "vinicius12", "vini@rafa", 2134566666)
-business = set.create_business("Tecnosync.br", 44, 2312421323)
+result, code = set.create_user("break2000123", "vinicius123", "vini@rafa", 2134566666)
+business = set.create_business("Tecnosync.br1", 2, 2312421323)
+
+salva = process.leads()
