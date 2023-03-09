@@ -86,6 +86,7 @@ def start(location, radius, keywords, user_id):
 
     # Realize a busca por empresas utilizando a API do Google Places
     results = {}
+    results_counter = 0
     for keyword in keywords:
         print(f'Buscando por "{keyword}"...')
         results[keyword] = google_places.search_places(location, radius, [keyword])
@@ -96,22 +97,26 @@ def start(location, radius, keywords, user_id):
         'user_id': user_id,
         'search_id': search_id,
         'search_date': search_date,
+        'keywords': keywords,
+        'results_counter': '',
         'results': {}
     }
     for keyword in keywords:
         extracted_data['results'][keyword] = []
         for result in results[keyword]:
             place_id = result.get('place_id')
+            results_counter += 1
             if place_id:
                 details = google_places.get_place_details(place_id)
                 details['keyword'] = keyword
                 extracted_data['results'][keyword].append(details)
+                extracted_data['results_counter'] = results_counter
     
     # Salve os resultados da busca em um arquivo JSON
     name = f'{search_id}.json'
-    with open(f'../slv0.0.2/data/_leads_saves/saves/{name}', 'w', encoding='utf-8') as f:
+    with open(f'./src/data/_leads_saves/saves/{name}', 'w', encoding='utf-8') as f:
         json.dump(extracted_data, f, ensure_ascii=False, indent=4)
 
-    # Ler o arquivo JSON e imprimir seus conteúdos
+"""     # Ler o arquivo JSON e imprimir seus conteúdos
     with open(f'../slv0.0.2/data/_leads_saves/saves/{name}', 'r', encoding='utf-8') as f:
-        data = json.load(f)
+        data = json.load(f) """
