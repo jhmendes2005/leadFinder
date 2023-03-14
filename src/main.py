@@ -1,5 +1,8 @@
 from tkinter import *
 import autoSearch
+from utils import get_key
+
+api_key = get_key.get_api_key()
 
 class Application:
     def __init__(self, master=None):
@@ -80,7 +83,9 @@ class Application:
         radInit = self.raio.get()
         radInit = f"{radInit}"
         self.mensagem["text"] = "Gerando busca..."
-        busca = autoSearch.start(locInit, radInit, keywords, 12371283)
+        
+        #busca = autoSearch.start(locInit, radInit, keywords, 12371283)
+        busca = autoSearch.start('-23.550520,-46.633308', 50000, keywords, 12371283, api_key)
         print(busca)
 
 

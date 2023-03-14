@@ -2,11 +2,10 @@ import requests
 import json
 import time
 import secrets
-from utils import get_key
 
 class GooglePlacesAPI:
-    def __init__(self):
-        self.api_key = get_key.get_api_key()
+    def __init__(self, api_key):
+        self.api_key = api_key
     
     def search_places(self, location, radius, keywords):
         results = []
@@ -77,9 +76,9 @@ class GooglePlacesAPI:
             'website': result.get('website', '')
         }
     
-def start(location, radius, keywords, user_id): 
+def start(location, radius, keywords, user_id, api_key): 
     # Crie uma instância da classe GooglePlacesAPI
-    google_places = GooglePlacesAPI()
+    google_places = GooglePlacesAPI(api_key)
 
     # Obtenha a data da busca como um timestamp
     search_date = int(time.time())
